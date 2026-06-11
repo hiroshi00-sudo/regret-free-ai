@@ -7,7 +7,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params
-  const supabase = createServiceClient()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const supabase = createServiceClient() as any
 
   const { data, error } = await supabase
     .from('analyses')

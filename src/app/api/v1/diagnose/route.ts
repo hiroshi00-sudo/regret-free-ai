@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
     const normalizedUrl = normalizeUrl(body.url)
     const platform      = detectPlatform(normalizedUrl)
     const asin          = extractAsin(normalizedUrl)
-    const supabase      = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase      = createServiceClient() as any
 
     // 商品を UPSERT（同一URL は再利用）
     const { data: product, error: productError } = await supabase

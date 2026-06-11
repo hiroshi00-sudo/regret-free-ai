@@ -63,7 +63,7 @@ export interface Database {
           score_expectation_gap: number | null
           score_price_regret: number | null
           score_use_case_mismatch: number | null
-          negative_insights: unknown
+          negative_insights: Record<string, unknown> | null
           alternative_product_ids: string[] | null
           ai_model: string | null
           error_message: string | null
@@ -72,7 +72,23 @@ export interface Database {
           created_at: string
         }
         Insert: Omit<Database['public']['Tables']['analyses']['Row'], 'id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['analyses']['Insert']>
+        Update: Partial<{
+          user_id: string | null
+          product_id: string
+          status: 'pending' | 'analyzing' | 'done' | 'error'
+          use_case: string | null
+          overall_score: number | null
+          score_durability: number | null
+          score_expectation_gap: number | null
+          score_price_regret: number | null
+          score_use_case_mismatch: number | null
+          negative_insights: Record<string, unknown>[] | null
+          alternative_product_ids: string[] | null
+          ai_model: string | null
+          error_message: string | null
+          result: unknown
+          completed_at: string | null
+        }>
       }
     }
   }
